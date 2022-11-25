@@ -19,16 +19,23 @@
 		#save{
 			padding:1% 2% 1% 2%;
 			border-radius: 3rem;
+			font-weight: bolder;
 		}
 		#password{
 			padding:1% 2% 1% 2%;
 			border-radius: 3rem;
+			font-weight: bolder;
 		}
 		#button{
-			padding:1% 2% 1% 2%;
+			padding:0.5% 1% 0.5% 1%;
 			border-radius: 3rem;
-			color: darksalmon;
-			background-color: ghostwhite;
+			color: white;
+			background-color: deepskyblue;
+			font-weight: bolder;
+		}
+		#course{
+			padding: 1% ;
+			border-radius: 3rem;
 		}
 	</style>
 		<script type="text/javascript">
@@ -36,14 +43,19 @@
 		{
 			var button=document.getElementById("save").value
 			var input=document.getElementById("password").value
+			var select=document.getElementById("course").value
+			var gmale=document.getElementById("male").checked
+			var gfemale=document.getElementById("female").checked
+			console.log(gmale,gfemale)
+			if(gmale==true) var gender="male"
+				else var gender="female"
 			fetch("http://localhost:4700/newData",{
 			method:"POST",
 			headers:{
 				"Content-Type":"application/json"
 			},
-			body:JSON.stringify({name:button,pin:input})
+			body:JSON.stringify({name:button,pin:input,course:select,gender:gender})
 		})
-		
 		.then((res)=>{
 			console.log(res)
 			if(res.status===200)
@@ -57,9 +69,18 @@
 </head>
 <body>
 	<div id="div">
-		<h1>Registration Page</h1>
+	<h1>Registration Page</h1>
 	<input id="save" type="text" placeholder="Enter text">
 	<p><input id="password" type="text" placeholder="Enter password"></p>
+		<select id="course">
+			<p><option value="select a course">select a course</option>
+			<option value="MPCS">MPCS</option>
+			<option value="BZC">BZC</option>
+			<option value="MPC">MPC</option>
+		</select></p>
+		<p><input id="male" type="radio" value="male" name="gender">male
+		<input id="female" type="radio" value="female" name="gender">female
+	</p>
 	<button id="button" onclick="submit()">submit</button>
 </div>
 </body>

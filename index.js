@@ -10,14 +10,15 @@
 		app.use(bodyParser.json())
 
 		app.use(cors())
+		
 		app.get("/",(req,res)=>{
 			res.send("gondu jathi")
 
 		})
 		app.post("/newData",(req,res)=>{
 			//console.log(req.body)
-			const {name,pin}=req.body
-			console.log(name,pin,"values")
+			const {name,pin,course,gender}=req.body
+			console.log(name,pin,course,gender,"values")
 			res.send("Data Added")
 
 		})
